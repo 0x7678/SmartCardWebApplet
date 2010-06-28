@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="jar" name="SmartCardWebApplet">
+<property name="build" value="bin"/>
+<property name="src" value="src"/>
+
+
+ <target name="compile" description="compile the source ">
+     <javac srcdir="${src}" destdir="${build}"/>
+       </target>
+       
+         <target name="jar" depends="compile" description="generate the
+         distribution">
+             <jar destfile="SmartCardWebApplet.jar">
+                   <fileset dir="${build}"/>
+                       </jar>
+                         </target>
+                         
+</project>

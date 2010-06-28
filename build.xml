@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="jar" name="SmartCardWebApplet">
+	<property name="build" value="bin" />
+	<property name="src" value="src" />
+
+
+	<target name="compile" description="compile the source ">
+		<javac srcdir="${src}" destdir="${build}" />
+	</target>
+
+	<target name="jar" depends="compile" description="generate the
+         distribution">
+		<jar destfile="SmartCardWebApplet.jar">
+			<fileset dir="${build}" />
+		</jar>
+	</target>
+
+	<target name="dist" depends="jar">
+		<exec executable="/usr/bin/scp">
+			<arg line='SmartCardWebApplet.jar OpenSC.jnlp martin:./public_html/' />
+		</exec>
+		<signjar keystore="${basedir}/signer.p12"
+		  alias="thawte consulting (pty) ltd. id von thawte freemail member"
+		  storetype="pkcs12"
+		  storepass="yourStorePassword">
+		  <path>
+		    <file path="SmartCardWebApplet.jar"/>
+		  </path>
+		</signjar>
+	</target>
+
+</project>

@@ -5,7 +5,11 @@
 
 
 	<target name="compile" description="compile the source ">
-		<javac srcdir="${src}" destdir="${build}" />
+		<javac srcdir="${src}" destdir="${build}">
+		<classpath>
+		<pathelement path="${java.home}/lib/plugin.jar"/>
+		</classpath>
+		</javac>
 	</target>
 
 	<target name="jar" depends="compile" description="generate the
@@ -13,20 +17,18 @@
 		<jar destfile="SmartCardWebApplet.jar">
 			<fileset dir="${build}" />
 		</jar>
+		<signjar keystore="${basedir}/signer.ks" alias="appletsign" storepass="salakala">
+			<path>
+				<fileset file="SmartCardWebApplet.jar" />
+			</path>
+		</signjar>
 	</target>
 
 	<target name="dist" depends="jar">
 		<exec executable="/usr/bin/scp">
-			<arg line='SmartCardWebApplet.jar OpenSC.jnlp martin:./public_html/' />
+			<arg line='SmartCardWebApplet.html SmartCardWebApplet.jar OpenSC.jnlp martin:./public_html/' />
 		</exec>
-		<signjar keystore="${basedir}/signer.p12"
-		  alias="thawte consulting (pty) ltd. id von thawte freemail member"
-		  storetype="pkcs12"
-		  storepass="yourStorePassword">
-		  <path>
-		    <file path="SmartCardWebApplet.jar"/>
-		  </path>
-		</signjar>
+
 	</target>
 
 </project>

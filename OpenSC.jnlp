@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<jnlp spec="1.0+" codebase="http://martinpaljak.net/"
-        href="OpenSC.jnlp">
+<jnlp spec="1.0+" href="OpenSC.jnlp" codebase="http://martinpaljak.net/">
         <information>
-                <title>Control Example</title>
-                <vendor>martinpaljak.net</vendor>
+                <title>OpenSC Smart Card Web Control Panel</title>
+                <vendor>Martin Paljak / OpenSC project</vendor>
                 <homepage href="http://www.opensc-project.org/opensc/wiki/WebApplet" />
-                <description>A demonstration of OpenSC Java</description>
+                <description>A demonstration of OpenSC Java capabilities</description>
         </information>
 
         <security>
@@ -17,6 +16,6 @@
                 <jar href="SmartCardWebApplet.jar"/>
         </resources>
 
-        <application-desc main-class="org.eclipse.swt.examples.controlexample.ControlExample" />
-        <applet-desc name="OpenSC" main-class="org.opensc.webapplet" width="100" height="400"/>
+        <applet-desc name="OpenSC" main-class="org.opensc.webapplet.WebApplet" width="240" height="80">
+		</applet-desc>
 </jnlp>

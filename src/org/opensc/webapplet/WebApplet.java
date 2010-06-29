@@ -31,7 +31,7 @@ public class WebApplet extends JApplet {
 		}
 	}
 	
-	public ArrayList<String> sign(String param) {
+	public String sign(String param) {
 		ArrayList<String> readers = new ArrayList<String>();
 		try {
 			TerminalFactory factory = TerminalFactory.getDefault();
@@ -42,7 +42,6 @@ public class WebApplet extends JApplet {
 		} catch (CardException e) {
 			e.printStackTrace();
 		}
-		return readers;
-		//return new String("Hello from applet " + (has_gui? "with GUI": "without GUI"));
+		return "Applet "+ getParameter("nickname") + (has_gui ? " with GUI" : " without GUI") + " found the following readers: " + readers.toString();
 	} 
 }

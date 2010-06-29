@@ -1,0 +1,21 @@
+OpenSC Smart Card Web Applet
+============================
+
+AKA "open source javax.smartcardio software for PKCS#15 with a web
+interface as well"
+
+Goals:
+* uses javax.smartcardio (PC/SC) for smart card access
+* knows how to read and parse PKCS#15 structures on card
+* knows how to map random ISO7816 filesystem cards to PKCS#15
+* provides a simple JNLP/Applet for managing a smart card
+* provides a scriptable signed applet for integrating operations such as
+  signing into web applications
+
+Future:
+* knows how to personalize smart cards, including blank JavaCards
+
+
+Contact:
+* OpenSC project, http://www.opensc-project.org, <opensc-devel@lists.opensc-project.org>
+* Martin Paljak, <martin@martinpaljak.net>

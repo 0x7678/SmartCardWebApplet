@@ -5,6 +5,7 @@
 
 
 	<target name="compile" description="compile the source ">
+		<mkdir dir="${build}"/>
 		<javac srcdir="${src}" destdir="${build}">
 		<classpath>
 		<pathelement path="${java.home}/lib/plugin.jar"/>
@@ -28,7 +29,9 @@
 		<exec executable="/usr/bin/scp">
 			<arg line='SmartCardWebApplet.html SmartCardWebApplet.png SmartCardWebApplet.jar OpenSC.jnlp martin:./public_html/' />
 		</exec>
-
 	</target>
-
+    <target name="clean">
+    	<delete dir="${build}"/>
+    	<delete file="SmartCardWebApplet.jar"/>
+    </target>
 </project>

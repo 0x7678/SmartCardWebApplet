@@ -1,35 +1,44 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <title>OpenSC SmartCardWebApplet demo</title>
 </head>
 
 <body>
-  <applet name="applet1" id="applet1" archive="SmartCardWebApplet.jar" code="org.opensc.webapplet.WebApplet" jnlp_href='OpenSC.jnlp' width="240" height="80">
-  <param name="jnlp_href" value="OpenSC.jnlp">
-  <param name="scriptable" value="true">
-  <param name="mayscript" value="true">
+  <h1>OpenSC SmartCardWebApplet demo</h1>
+
+  <h2>JNLP applet</h2>
+  <applet name="applet1" id="applet1" jnlp_href='OpenSC.jnlp' width="240" height="80">
+    <param name="jnlp_href" value="OpenSC.jnlp" />
+    <param name="scriptable" value="true" />
+    <param name="mayscript" value="true" />
+  </applet>
+
+  <h2>Normal applet with GUI</h2>
+  <applet name="applet2" id="applet2" code="org.opensc.webapplet.WebApplet" archive="SmartCardWebApplet.jar" width="240" height="80">
+    <param name="gui" value="true"/>
+    <param name="scriptable" value="true" />
+    <param name="mayscript" value="true" />
+  </applet>
+
+
+  <h2>Normal applet without GUI</h2>
+  <applet name="applet3" id="applet3" code="org.opensc.webapplet.WebApplet" archive="SmartCardWebApplet.jar" width="240" height="80">
+    <param name="scriptable" value="true" />
+    <param name="mayscript" value="true" />
   </applet>
   
-  <applet name="applet2" id="applet2" code="org.opensc.webapplet.WebApplet" archive="SmartCardWebApplet.jar" width="240" height="80"> 
-  <param name="scriptable" value="true">
-    <param name="mayscript" value="true"> 
-  </applet>
-  <script>
-function sign1() {
-plug1 = document.getElementById('applet2');
-plug1.sign("yeah");
-}
-
-function sign2() {
-plug2 = document.getElementById('applet2');
-plug2.sign("yeah");
-}
-</script>
-<a href="#" onclick="sign1();">test1</a>
-<a href="javascript:sign2();">test2</a>
-
+  <script type="text/javascript">
+//<![CDATA[
+  function sign(applet) {
+  plugin = document.getElementById('applet'+applet);
+  window.alert(plugin.sign("sha1WithRSAEncryption"));
+  }
+  //]]>
+  </script><a href="#" onclick="sign(1);">TEST 1</a>
+  </script><a href="#" onclick="sign(2);">TEST 2</a>
+  </script><a href="#" onclick="sign(3);">TEST 3</a>
 </body>
-
 </html>

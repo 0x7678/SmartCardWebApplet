@@ -13,12 +13,16 @@ import javax.smartcardio.*;
 
 public class WebApplet extends JApplet {
 	private JSObject window;
+	
+	private boolean has_gui = false;
 	public void init() {
-		JLabel label = new JLabel("OpenSC Web Control Applet");
-		label.setHorizontalAlignment(JLabel.CENTER);
-		label.setBorder(BorderFactory.createMatteBorder(1, 1, 2, 2, Color.black));
-		getContentPane().add(label, BorderLayout.CENTER);
-		System.out.println("init");
+		has_gui = getParameter("GUI").equalsIgnoreCase("true");
+		if (has_gui) {
+			JLabel label = new JLabel("OpenSC Web Control Applet");
+			label.setHorizontalAlignment(JLabel.CENTER);
+			label.setBorder(BorderFactory.createMatteBorder(1, 1, 2, 2, Color.black));
+			getContentPane().add(label, BorderLayout.CENTER);
+		}
 		try {
 			window = JSObject.getWindow(this);
 		} catch (Exception e) {
@@ -26,8 +30,7 @@ public class WebApplet extends JApplet {
 		}
 	}
 	
-	public void sign(String param, String cb1) {
-		System.out.println("sign");
-		window.eval("window.alert(\'helo\');");
+	public String sign(String param) {
+		return new String("Hello from applet " + (has_gui? "with GUI": "without GUI"));
 	} 
 }

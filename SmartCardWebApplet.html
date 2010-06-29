@@ -8,8 +8,39 @@
 
 <body>
   <h1>OpenSC SmartCardWebApplet</h1>
-  This requires enabled Java 1.6+ (download <a href="http://www.java.com/en/download/">here</a> if needed)
+  <p><b>NB!</b>This requires enabled Java 1.6+ (javax.smartcardio.*), <a href="http://www.java.com/en/download/">download from here</a> if needed.</p>
+  <p>This applet is supposed to be the easiest way to get started with smart cards on any modern client platform (Windows, Mac or Linux), written in pure Java and requiring no additional downloads, if you have a working PC/SC smart card reader attached to your computer.
+	
+<p><b>Currently this page exists to test the integration of Java and various browsers on different platforms.</b></p> It must be transformed into a page that detects possible issues and gives user-friendly advice on what to do to let the Java application/applet run. (Is JavaScript enabled? Is Java enabled? Is it the correct version? Is the browser-platform-java combo known to have problems? etc)
+	
+The applet itself will be capable of executing the following tasks:
+<ul>
+	<li>(Phase 1) Initialize cards/manage JavaCards-s. This means loading and deleting MuscleApplet to recent unlocked JavaCards, like Oberthur Cosmo v7, with the help of GlobalPlatformJava</li>
+	<li>(Phase 1) Read PKCS#15 structures from compatible ISO7816-4 smart cards, with the help of opensc-java/javacardsign PKCS#15 decoders</li>
+	<li>(Phase 3) Personalize smart cards, by creating cryptographic objects on the card and writing PKCS#15 structures</li>
+	<li>(Phase 2) Provide a simple smart card management GUI for operations like PIN change, visualizing the content of the card etc</li>
+	<li>(Phase 1) Provide a scriptable interface for websites to facilitate online signature generation, enrollment and all other applet functionality deemed to be reasonable to expose to JavaScript.</li>
+</ul>	
 
+The Java applet will come in three different flavors:
+<ol>
+	<li>"Fat" JNLP (downloadable) application with a (simple) GUI</li>
+	<li>Applet with the GUI embedded into the web page (demonstrated below), possibly used for scripting</li>
+	<li>Applet without GUI, used for scripting with JavaScript (demonstrated below)</li>
+</ol>
+
+Under the gool, the goal is to re-implement OpenSC card drivers in Java (which provides far superior mechanisms for inheritance, which is used to implement most drivers in OpenSC) which now provides "native" access to smart cards via javax.smartcardio. Use of PKCS#11 modules might be added in the future, but is not on the table right now. Because all card drivers will have to be re-implemented in Java, not all cards usable with OpenSC will be usable via this method. A side-product of this project will be a separately packaged PKCS#15 encoder/decoder.
+
+For more information:
+  <ul>
+  <li>Source code is available on github: <a href="http://github.com/martinpaljak/SmartCardWebApplet">http://github.com/martinpaljak/SmartCardWebApplet</a></li>
+  <li>Wiki is on <a href="http://www.opensc-project.org/opensc/wiki/SmartCardWebApplet">OpenSC project Trac</a></li>
+  <li>Use <a href="http://www.opensc-project.org/mailman/listinfo/opensc-devel">opensc-devel list</a> or contact <a href="mailto:martin@martinpaljak.net">Martin Paljak</a> directly with questions and comments.</li>
+	<li>The canonical URL for this feature is currently <a href="http://martinpaljak.net/SmartCardWebApplet.html">http://martinpaljak.net/SmartCardWebApplet.html</a>. If the implementation stabilizes, will be moved to https://www.opensc-project.org/</li>
+  </ul>
+  
+  </p>
+  <hr/>
   <h2>JNLP applet</h2>
   <applet name="applet1" id="applet1" jnlp_href='OpenSC.jnlp' width="240" height="80">
     <param name="jnlp_href" value="OpenSC.jnlp" />
@@ -25,8 +56,8 @@
   </applet>
 
 
-  <h2>Normal applet without GUI</h2>
-  <applet name="applet3" id="applet3" code="org.opensc.webapplet.WebApplet" archive="SmartCardWebApplet.jar" width="240" height="80">
+  <h2>Normal applet without GUI (1x1 pixels)</h2>
+  <applet name="applet3" id="applet3" code="org.opensc.webapplet.WebApplet" archive="SmartCardWebApplet.jar" width="1" height="1">
     <param name="scriptable" value="true" />
     <param name="mayscript" value="true" />
   </applet>
